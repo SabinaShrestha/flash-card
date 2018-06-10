@@ -11,13 +11,54 @@ $(document).ready(function(){
     const answer = document.getElementById('answer').value
     const card = {"topic":topic, "question":question, "answer":answer}
     cards.push(card)
+
+    const d = document.createElement("div")
+    d.className = "dd"
+
+    const place = document.getElementById("p").appendChild(d)
+
     const li = document.createElement("li")
-    li.className = "entry"
-    document.getElementById("print").appendChild(li).innerHTML = card.question
+    li.className = "question"
+    li.innerHTML = card.question
+
+    const li2 = document.createElement("li")
+    li2.className = "question hide"
+    li2.innerHTML = card.answer
+
+    place.appendChild(li)
+    place.appendChild(li2)
+
     const btn = document.createElement("button")
-    btn.calssName="remove"
-    li.appendChild(btn).innerHTML = "Delete"
-    debugger
+    btn.className="delete"
+    btn.innerHTML = "Delete"
+
+    const btn1 = document.createElement("button")
+    btn1.className="change"
+    btn1.innerHTML = "Show Ans"
+
+
+    place.appendChild(btn)
+    place.appendChild(btn1)
+
+  })
+
+
+
+  $(document).on('click', '.delete', function(){
+
+    $(this).parents('.dd').remove()
+  })
+
+
+
+  $(document).on('click', '.change', function(){
+    const v = $(this)[0]
+    if (v.innerHTML === "Show Ans"){
+      v.innerHTML = "Show Question"
+     } else {
+      v.innerHTML = "Show Ans"
+     }
+    $(this).siblings('.question').toggleClass('hide')
   })
 
 
